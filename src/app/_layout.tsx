@@ -11,9 +11,11 @@ export default function RootLayout() {
       // isConnected is null while unknown, so only an explicit false counts as offline.
       const isOffline = state.isConnected === false;
       const { isOffline: wasOffline, setOffline, loadCharacters } = useCharactersStore.getState();
+      // Every store update rewrites the persisted cache, so skip events that change nothing.
+      if (isOffline === wasOffline) return;
 
       setOffline(isOffline);
-      if (wasOffline && !isOffline) loadCharacters();
+      if (!isOffline) loadCharacters();
     });
   }, []);
 
