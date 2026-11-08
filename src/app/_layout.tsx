@@ -20,7 +20,7 @@ export default function RootLayout() {
   return (
     <>
       <StatusBar style="dark" />
-      <Stack>
+      <Stack screenOptions={{ contentStyle: { backgroundColor: '#fff' } }}>
         <Stack.Screen name="index" options={{ title: 'Characters' }} />
         <Stack.Screen name="character/[id]" options={{ title: '' }} />
       </Stack>
