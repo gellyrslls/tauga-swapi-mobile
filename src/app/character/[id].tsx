@@ -1,11 +1,11 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import { isKnown } from '../../api/swapi';
 import { useCharactersStore } from '../../store/characters';
 
 function format(value: string, unit?: string): string {
-  if (!isKnown(value)) return 'Unknown';
+  if (value === 'n/a') return 'N/A';
+  if (value === 'unknown') return 'Unknown';
   if (unit) return `${value} ${unit}`;
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
