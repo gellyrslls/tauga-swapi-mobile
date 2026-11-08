@@ -15,6 +15,8 @@ export function CharacterRow({ character }: Props) {
     <Pressable
       onPress={() => router.push({ pathname: '/character/[id]', params: { id: character.id } })}
       style={({ pressed }) => [styles.row, pressed && styles.pressed]}
+      accessibilityRole="button"
+      accessibilityLabel={[character.name, subtitle].filter(Boolean).join(', ')}
     >
       <View style={styles.text}>
         <Text style={styles.name}>{character.name}</Text>

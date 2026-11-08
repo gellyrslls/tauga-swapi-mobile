@@ -16,7 +16,7 @@ export function OfflineBanner({ isOffline, lastUpdated, onRetry }: Props) {
         {reason}
         {since}
       </Text>
-      <Pressable onPress={onRetry} hitSlop={8}>
+      <Pressable onPress={onRetry} hitSlop={8} accessibilityRole="button">
         <Text style={styles.retry}>Retry</Text>
       </Pressable>
     </View>
