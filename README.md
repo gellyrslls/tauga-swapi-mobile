@@ -22,12 +22,3 @@ Press `a` to open the app in Expo Go on a running Android emulator.
 npm test
 npm run lint
 ```
-
-## Build an APK
-
-The `preview` profile builds a standalone APK on EAS, which is the easiest way to try a cold start without a network connection.
-
-```sh
-npx eas-cli@latest build -p android --profile preview
-adb install <downloaded-file>.apk
-```
