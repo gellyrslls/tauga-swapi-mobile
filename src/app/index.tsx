@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   separator: {
-    height: StyleSheet.hairlineWidth,
+    height: 1,
     marginLeft: 16,
-    backgroundColor: '#ddd',
+    backgroundColor: '#eee',
   },
 });

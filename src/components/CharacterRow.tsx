@@ -1,4 +1,4 @@
-import { Link } from 'expo-router';
+import { router } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { isKnown } from '../api/swapi';
@@ -12,15 +12,16 @@ export function CharacterRow({ character }: Props) {
   const subtitle = [character.gender, character.birth_year].filter(isKnown).join(', ');
 
   return (
-    <Link href={{ pathname: '/character/[id]', params: { id: character.id } }} asChild>
-      <Pressable style={({ pressed }) => [styles.row, pressed && styles.pressed]}>
-        <View style={styles.text}>
-          <Text style={styles.name}>{character.name}</Text>
-          {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
-        </View>
-        <Text style={styles.chevron}>›</Text>
-      </Pressable>
-    </Link>
+    <Pressable
+      onPress={() => router.push({ pathname: '/character/[id]', params: { id: character.id } })}
+      style={({ pressed }) => [styles.row, pressed && styles.pressed]}
+    >
+      <View style={styles.text}>
+        <Text style={styles.name}>{character.name}</Text>
+        {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
+      </View>
+      <Text style={styles.chevron}>›</Text>
+    </Pressable>
   );
 }
 
