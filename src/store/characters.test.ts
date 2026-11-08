@@ -31,7 +31,27 @@ function mockFetch(response: Partial<Response> | Error) {
 
 beforeEach(async () => {
   await AsyncStorage.clear();
-  useCharactersStore.setState({ characters: [], lastUpdated: null, status: 'idle' });
+  useCharactersStore.setState({
+    characters: [],
+    lastUpdated: null,
+    status: 'idle',
+    hasHydrated: false,
+  });
+});
+
+it('restores cached characters from AsyncStorage on launch', async () => {
+  const cachedLuke = { ...luke, id: '1' };
+  await AsyncStorage.setItem(
+    'characters',
+    JSON.stringify({ state: { characters: [cachedLuke], lastUpdated: 123 }, version: 0 }),
+  );
+
+  await useCharactersStore.persist.rehydrate();
+
+  const state = useCharactersStore.getState();
+  expect(state.hasHydrated).toBe(true);
+  expect(state.characters).toEqual([cachedLuke]);
+  expect(state.lastUpdated).toBe(123);
 });
 
 it('stores and caches characters after a successful fetch', async () => {
